@@ -2,47 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  scroll-behavior: smooth;
-  background-color: #0a0a0f;
-  color: #ffffff;
+@layer base {
+  /* 1. Enable native smooth scrolling for all anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* 2. Prevent horizontal scroll breaking on 320px mobile devices */
+  body {
+    @apply bg-darkBg text-white;
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 3. Fix tap-highlight colors on mobile Safari/Chrome */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
-/* Base style resetting and smooth-scrollbar adjustments */
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #0a0a0f;
-  overflow-x: hidden;
+@layer utilities {
+  /* Vanilla-Tilt 3D Utilities (Keep these from earlier!) */
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .transform-translate-z-20 {
+    transform: translateZ(20px);
+  }
+
+  .transform-translate-z-30 {
+    transform: translateZ(30px);
+  }
 }
 
-/* Custom Webkit Scrollbar */
+/* 4. Disable Vanilla-Tilt 3D effects on Touch Devices */
+/* 3D hover effects can feel sticky or trap scrolling on mobile phones */
+@media (hover: none) and (pointer: coarse) {
+  .tilt-card {
+    transform: none !important;
+    transition: none !important;
+  }
+  .tilt-card > * {
+    transform: none !important;
+  }
+}
+
+/* 5. Custom Scrollbar Styling (Premium Desktop Feel) */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0f;
+  background: #0a0a0f; 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #7F77DD, #1D9E75);
-  border-radius: 4px;
+  background: #333344; 
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #968ef2, #24bd8d);
-}
-
-/* Vanilla-Tilt 3D Utilities */
-.transform-style-3d {
-  transform-style: preserve-3d;
-}
-
-.transform-translate-z-20 {
-  transform: translateZ(20px);
-}
-
-.transform-translate-z-30 {
-  transform: translateZ(30px);
+  background: #7F77DD; 
 }
