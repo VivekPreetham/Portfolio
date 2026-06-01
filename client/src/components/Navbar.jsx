@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiGithub, FiLinkedin, FiDownload } from 'react-icons/fi';
 
+// 1. The Updated Links Array (Services added perfectly in the middle)
 const navLinks = [
   { name: 'Home', id: 'home' },
   { name: 'About', id: 'about' },
   { name: 'Skills', id: 'skills' },
+  { name: 'Services', id: 'services' }, // 👈 New link added here!
   { name: 'Projects', id: 'projects' },
   { name: 'Education', id: 'education' },
   { name: 'Contact', id: 'contact' },

@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
+import Services from './components/Services'; // 👈 1. New Services Import
 import Projects from './components/Projects';
 import Education from './components/Education';
 import Contact from './components/Contact';
@@ -31,9 +32,6 @@ const App = () => {
     <MotionConfig reducedMotion="user">
       <div className="relative min-h-screen bg-darkBg text-white selection:bg-accentPurple selection:text-white">
         
-        {/* AnimatePresence monitors mounted/unmounted status of its direct children. 
-          When loading hits false, the Loader will cleanly run its exit fade animation.
-        */}
         <AnimatePresence mode="wait">
           {loading && <Loader />}
         </AnimatePresence>
@@ -67,6 +65,10 @@ const App = () => {
 
           <section id="skills">
             <Skills />
+          </section>
+
+          <section id="services">
+            <Services />
           </section>
 
           <section id="projects">

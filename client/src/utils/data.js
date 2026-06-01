@@ -111,3 +111,28 @@ export const fallbackProjects = [
     color: "#EC4899"
   }
 ];
+
+// client/src/utils/data.js
+
+export const servicesData = [
+  {
+    id: "01",
+    title: "Web Development",
+    description: "I build scalable full-stack applications with modern frameworks and production-ready architecture."
+  },
+  {
+    id: "02",
+    title: "AI Systems Development",
+    description: "I design and integrate LLM-powered systems, RAG pipelines, and intelligent automation workflows."
+  },
+  {
+    id: "03",
+    title: "System Architecture Design",
+    description: "I architect robust APIs, scalable backend systems, and structured data-driven platforms."
+  },
+  {
+    id: "04",
+    title: "Machine Learning & Optimization",
+    description: "I build predictive models, time-series systems, and constraint optimization solutions."
+  }
+];
