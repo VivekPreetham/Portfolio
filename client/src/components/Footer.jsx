@@ -26,8 +26,9 @@ const Footer = () => {
           >
             Vivek Preetham
           </h3>
-          <p className="text-gray-500 text-sm mt-2 max-w-sm">
-            Designing and engineering clean, optimized full-stack architectures.
+          {/* FIX: Removed max-w-sm so the text can flow in a single line */}
+          <p className="text-gray-500 text-sm mt-2">
+            Building intelligent systems at the intersection of AI and full-stack engineering.
           </p>
         </div>
 
@@ -38,7 +39,6 @@ const Footer = () => {
             {[
               { icon: FiGithub, href: "https://github.com/VivekPreetham" },
               { icon: FiLinkedin, href: "https://www.linkedin.com/in/vivek-preetham-714a632a6/" },
-              { icon: FiTwitter, href: "https://twitter.com/yourusername" },
               { icon: FiMail, href: "mailto:vivekpreetham12@gmail.com" }
             ].map((social, index) => (
               <a

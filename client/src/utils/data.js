@@ -1,9 +1,9 @@
 
 export const infoCards = [
-  { id: 1, label: "Location", value: "Hyderabad, India" },
-  { id: 2, label: "Email", value: "vivekpreetham12@gmail.com" }, // Replace with your actual email
-  { id: 3, label: "Degree", value: "B.Tech CSE specialization in Data Science & Analytics" },
-  { id: 4, label: "Available For", value: "Open Opportunities & Internship" }
+  { id: 1, label: "Location", value: "Hyderabad, Telangana 🇮🇳" },
+  { id: 2, label: "Email", value: "vivekpreetham12@gmail.com" },
+  { id: 3, label: "Degree", value: "B.Tech CSE — Data Science & Analytics, IIIT Nagpur (2023 – 2027)" },
+  { id: 4, label: "Available For", value: "AI/ML Roles · Full Stack · Internships · Full-Time 2027" }
 ];
 
 export const skillsData = [
@@ -104,27 +104,25 @@ export const fallbackProjects = [
   }
 ];
 
-// client/src/utils/data.js
-
 export const servicesData = [
   {
     id: "01",
     title: "Web Development",
-    description: "I build scalable full-stack applications with modern frameworks and production-ready architecture."
+    description: "I build full-stack MERN applications with production-ready architecture — JWT auth, MongoDB Atlas persistence, RESTful APIs, and React frontends."
   },
   {
     id: "02",
     title: "AI Systems Development",
-    description: "I design and integrate LLM-powered systems, RAG pipelines, and intelligent automation workflows."
+    description: "I integrate LLMs into real applications — building document intelligence platforms, AI-powered learning systems, and NLP pipelines."
   },
   {
     id: "03",
     title: "System Architecture Design",
-    description: "I architect robust APIs, scalable backend systems, and structured data-driven platforms."
+    description: "I design distributed systems with clean separation of concerns — REST APIs, JWT-secured routes, cloud databases, and AI inference services working together in scalable architectures."
   },
   {
     id: "04",
     title: "Machine Learning & Optimization",
-    description: "I build predictive models, time-series systems, and constraint optimization solutions."
+    description: "From TensorFlow and PyTorch model training to NLP preprocessing pipelines, I build ML systems focused on measurable results — reduced misclassification, improved accuracy, production deployment."
   }
 ];

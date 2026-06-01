@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { FiMail, FiGithub, FiLinkedin, FiTwitter, FiSend } from 'react-icons/fi';
+import { FiMail, FiGithub, FiLinkedin, FiSend } from 'react-icons/fi'; // Removed FiTwitter
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -69,24 +69,41 @@ const Contact = () => {
             </h2>
             
             <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-md">
-              I'm currently looking for new opportunities and collaborations. Whether you have a question, a project proposal, or just want to say hi, my inbox is always open!
+              I'm actively looking for AI/ML engineering roles, Full Stack AI internships, and research collaborations. Whether you have a project, an opportunity, or just want to talk about AI systems — my inbox is always open!
             </p>
 
-            {/* Pulsing Availability Badge */}
-            <div className="flex items-center gap-3 mb-10 px-4 py-2 bg-white/5 border border-white/10 rounded-full w-fit backdrop-blur-sm">
-              <div className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            {/* NEW BADGES SECTION */}
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-10">
+              
+              {/* Badge 1: Availability */}
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-accentTeal/30 bg-accentTeal/10 backdrop-blur-sm shadow-[0_0_15px_rgba(29,158,117,0.1)] w-fit">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accentTeal opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accentTeal"></span>
+                </span>
+                <span className="text-sm font-medium text-accentTeal">
+                  Available for Internships · 2027 Full-Time
+                </span>
               </div>
-              <span className="text-sm font-medium text-gray-300">Open to Opportunities</span>
+
+              {/* Badge 2: Target Roles (Now with a matching purple dot) */}
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-accentPurple/30 bg-accentPurple/10 backdrop-blur-sm shadow-[0_0_15px_rgba(127,119,221,0.1)] w-fit">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accentPurple opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accentPurple"></span>
+                </span>
+                <span className="text-sm font-medium text-accentPurple">
+                  Open to AI/ML & Full Stack Roles
+                </span>
+              </div>
+
             </div>
 
-            {/* Social Links */}
+            {/* Social Links (Twitter Removed) */}
             <div className="flex items-center gap-6">
               {[
                 { icon: FiGithub, href: "https://github.com/VivekPreetham" },
                 { icon: FiLinkedin, href: "https://www.linkedin.com/in/vivek-preetham-714a632a6/" },
-                { icon: FiTwitter, href: "https://twitter.com/yourusername" },
                 { icon: FiMail, href: "mailto:vivekpreetham12@gmail.com" }
               ].map((social, index) => (
                 <a 

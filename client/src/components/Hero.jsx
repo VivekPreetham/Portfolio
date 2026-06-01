@@ -128,10 +128,11 @@ const Hero = () => {
           <Typewriter
             options={{
               strings: [
-                'Full Stack Developer',
-                'Machine Learning Engineer',
-                'Problem Solver',
-                'Gen AI engineer'
+                'MERN Stack Developer',
+                'AI/ML Engineer',
+                'RAG & LLM Systems Builder',
+                'Gen AI Engineer',
+                'Deep Learning Enthusiast'
               ],
               autoStart: true,
               loop: true,
@@ -143,8 +144,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.p variants={itemVariants} className="text-gray-400 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
-          I build high-performance, visually stunning web applications with the MERN stack. 
-          Passionate about clean code, robust backend architectures, and seamless user experiences.
+          Engineering the future of data-driven applications. I specialize in Full-Stack AI leveraging Data Science and Machine Learning to uncover insights, Gen-AI to build intelligent systems, and modern Web Development to deliver them to the world.
         </motion.p>
 
         {/* 4. CTA Buttons & Socials */}
@@ -173,7 +173,6 @@ const Hero = () => {
           {[
             { icon: FaGithub, href: "https://github.com/VivekPreetham" },
             { icon: FaLinkedin, href: "https://www.linkedin.com/in/vivek-preetham-714a632a6/" },
-            { icon: FaTwitter, href: "https://twitter.com/yourusername" },
             { icon: FaCode, href: "https://leetcode.com/u/VivekPreetham12/" }
           ].map((social, index) => (
             <a 

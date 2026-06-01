@@ -64,12 +64,11 @@ const About = () => {
             </h3>
             
             <p className="text-gray-400 leading-relaxed mb-6">
-              I am a dedicated software engineer currently pursuing my <span className="text-white font-medium">B.Tech in Computer Science and Engineering</span> at IIIT Nagpur. 
-              My journey in tech is driven by a deep fascination with building scalable, efficient, and visually engaging web applications.
+              I'm a final-year B.Tech CSE student specializing in <span className="text-accentTeal font-semibold">Data Science & Analytics</span> at IIIT Nagpur. I architect and deploy <span className="text-transparent bg-clip-text bg-gradient-to-r from-accentPurple to-accentTeal font-bold">production-grade AI systems</span> — building everything from <span className="text-white font-medium">RAG pipelines</span> with <span className="text-accentPurple font-medium">LangChain</span> and <span className="text-accentPurple font-medium">FAISS</span>, to full-stack <span className="text-white font-medium">MERN applications</span> with distributed microservice backends.
             </p>
             
             <p className="text-gray-400 leading-relaxed mb-8">
-              I specialize in the <span className="text-accentPurple font-medium">MERN Stack</span> and have a strong foundation in <span className="text-accentTeal font-medium">Artificial Intelligence</span> and Machine Learning, particularly focusing on Retrieval-Augmented Generation (RAG) architectures. When I'm not coding, you can find me exploring system design patterns or competing in esports tournaments!
+              Outside of code, I lead visual design for college events as Design Lead at <span className="text-white font-medium">Abhivyakti</span> and <span className="text-white font-medium">Strokes Design Club</span> — which means I bring both <span className="text-accentPurple font-semibold">engineering precision</span> and <span className="text-accentTeal font-semibold">design thinking</span> to everything I build.
             </p>
 
             {/* Info Cards Grid */}
