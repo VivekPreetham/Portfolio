@@ -23,7 +23,7 @@
 }
 
 @layer utilities {
-  /* Vanilla-Tilt 3D Utilities (Keep these from earlier!) */
+  /* Vanilla-Tilt 3D Utilities */
   .transform-style-3d {
     transform-style: preserve-3d;
   }
@@ -35,9 +35,17 @@
   .transform-translate-z-30 {
     transform: translateZ(30px);
   }
+
+  /* 4. Eliminating Layout Shift and Jank via Hardware Acceleration */
+  /* Add this class to heavily animated containers like grids or timeline cards */
+  .optimize-gpu {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
 }
 
-/* 4. Disable Vanilla-Tilt 3D effects on Touch Devices */
+/* 5. Disable Vanilla-Tilt 3D effects on Touch Devices */
 /* 3D hover effects can feel sticky or trap scrolling on mobile phones */
 @media (hover: none) and (pointer: coarse) {
   .tilt-card {
@@ -49,7 +57,7 @@
   }
 }
 
-/* 5. Custom Scrollbar Styling (Premium Desktop Feel) */
+/* 6. Custom Scrollbar Styling (Premium Desktop Feel) */
 ::-webkit-scrollbar {
   width: 8px;
 }

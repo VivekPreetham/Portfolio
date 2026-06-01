@@ -11,12 +11,16 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 1. Fetch Data from Express API
+// 1. Fetch Data from Express API (Memory-Leak Proof)
   useEffect(() => {
+    const abortController = new AbortController();
+
     const fetchProjects = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-        const response = await axios.get(`${apiUrl}/projects`);
+        const response = await axios.get(`${apiUrl}/projects`, {
+          signal: abortController.signal // Link the signal to the request
+        });
         
         if (response.data.success && response.data.data.length > 0) {
           setProjects(response.data.data);
@@ -24,14 +28,20 @@ const Projects = () => {
           setProjects(fallbackProjects);
         }
       } catch (error) {
+        // Ignore the error if it was intentionally aborted by component unmount
+        if (error.name === 'CanceledError') return; 
+        
         console.error("API Fetch Failed, loading fallback data:", error.message);
-        setProjects(fallbackProjects); // Fallback if backend is down
+        setProjects(fallbackProjects);
       } finally {
         setLoading(false);
       }
     };
 
     fetchProjects();
+
+    // Cleanup function runs if the component unmounts before fetch completes
+    return () => abortController.abort();
   }, []);
 
   // 2. Initialize Vanilla-Tilt 3D Effect after projects load

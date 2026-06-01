@@ -11,20 +11,27 @@ connectDB();
 
 const app = express();
 
-// Security Middleware: Protects against well-known web vulnerabilities by setting HTTP headers
+// 1. CRITICAL FOR DEPLOYMENT: Trust the reverse proxy headers (Render, Railway, AWS, etc.)
+// Without this, express-rate-limit will block ALL users when one user triggers it.
+app.set('trust proxy', 1);
+
+// Security Middleware
 app.use(helmet());
 
-// Cross-Origin Resource Sharing: Only allow requests from your specific frontend URL
+// 2. BULLETPROOF CORS CONFIGURATION
+// Explicitly falls back to local Vite development port if the env variable isn't read cleanly
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
+  optionsSuccessStatus: 200
 }));
 
-// Body Parser Middleware: Allows Express to accept JSON and URL-encoded data
+// Body Parser Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate Limiting: Prevents spam (Max 5 requests per 15 minutes per IP)
+// Rate Limiting (Spam Prevention)
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 5, 
@@ -37,23 +44,27 @@ const contactLimiter = rateLimit({
 
 // Health Check Route
 app.get('/', (req, res) => {
-  res.send('MERN Portfolio API is running...');
+  res.status(200).json({ success: true, message: 'MERN Portfolio API is running smoothly...' });
 });
 
-// Rate limited contact route mapping
+// Route mapping
 app.use('/api/contact', contactLimiter, require('./routes/contactRoutes'));
-
 app.use('/api/projects', require('./routes/projectRoutes'));
 
+// 3. FALLBACK FOR UNHANDLED ROUTES
+// Prevents frontend jank if an incorrect endpoint is targeted by returning standard JSON
+app.use((req, res, next) => {
+  const error = new Error(`Not Found - ${req.originalUrl}`);
+  res.status(404);
+  next(error);
+});
 
 // --- ERROR HANDLING ---
 app.use(errorHandler);
-
 
 // --- SERVER INITIALIZATION ---
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-  
 });

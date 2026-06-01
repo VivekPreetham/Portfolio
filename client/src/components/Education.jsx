@@ -1,3 +1,4 @@
+// client/src/components/Education.jsx
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
@@ -13,8 +14,11 @@ const Education = () => {
 
   // GSAP ScrollTrigger for the self-drawing timeline line
   useEffect(() => {
-    // gsap.context ensures smooth cleanup in React 18 Strict Mode
-    const ctx = gsap.context(() => {
+    // gsap.matchMedia automatically handles scoped animation creation and cleanup
+    let mm = gsap.matchMedia();
+
+    // 1. STANDARD SCROLL ANIMATION (Executed when NO reduced-motion preference is active)
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(
         lineRef.current,
         { height: '0%' },
@@ -29,9 +33,16 @@ const Education = () => {
           },
         }
       );
-    }, containerRef);
+    });
 
-    return () => ctx.revert(); // Cleanup on unmount
+    // 2. ACCESSIBILITY FALLBACK (Executed when the user requests REDUCED motion)
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      // Instantly pin the timeline line to its maximum height with zero transitions
+      gsap.set(lineRef.current, { height: '100%' });
+    });
+
+    // Revert handles deep garbage collection natively when the component unmounts
+    return () => mm.revert(); 
   }, []);
 
   return (
@@ -55,16 +66,16 @@ const Education = () => {
         {/* Timeline Container */}
         <div ref={containerRef} className="relative w-full pb-10">
           
-          {/* 1. Static Background Line (Dimmed) */}
+          {/* Static Background Line (Dimmed) */}
           <div className="absolute left-[8%] md:left-1/2 top-0 bottom-0 w-1 bg-white/5 transform -translate-x-1/2 rounded-full z-0" />
           
-          {/* 2. Animated Gradient Fill Line */}
+          {/* Animated Gradient Fill Line */}
           <div 
             ref={lineRef} 
             className="absolute left-[8%] md:left-1/2 top-0 w-1 bg-gradient-to-b from-accentPurple to-accentTeal transform -translate-x-1/2 rounded-full z-10" 
           />
 
-          {/* 3. Timeline Cards */}
+          {/* Timeline Cards */}
           <div className="flex flex-col gap-12">
             {educationData.map((edu, index) => {
               // Alternating logic for desktop
@@ -79,9 +90,9 @@ const Education = () => {
                   {/* Timeline Dot (Snaps to line) */}
                   <div className="absolute left-[8%] md:left-1/2 w-5 h-5 bg-darkBg border-4 border-accentPurple rounded-full transform -translate-x-1/2 z-20 shadow-[0_0_15px_rgba(127,119,221,0.6)]" />
 
-                  {/* Card Content */}
+                  {/* Card Content Wrapper with optimize-gpu enhancement to safeguard against layout frame drops */}
                   <motion.div 
-                    className={`w-[85%] md:w-[45%] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-accentPurple/50 hover:bg-white/10 transition-all duration-300 group`}
+                    className="w-[85%] md:w-[45%] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-accentPurple/50 hover:bg-white/10 transition-all duration-300 group optimize-gpu"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true, amount: 0.5 }}

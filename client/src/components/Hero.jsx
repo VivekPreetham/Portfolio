@@ -46,7 +46,7 @@ const Hero = () => {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
 
-      {/* 2. tsParticles Interactive Web (v2 Syntax) */}
+      {/* 2. tsParticles Interactive Web (v2 Syntax with Mobile Optimizations) */}
       <Particles
         id="tsparticles"
         className="absolute inset-0 z-0"
@@ -82,11 +82,27 @@ const Hero = () => {
               speed: 1,
               straight: false,
             },
-            number: { density: { enable: true, area: 800 }, value: 40 },
+            number: { 
+              density: { enable: true, area: 800 }, 
+              value: 40 // Default desktop node count
+            },
             opacity: { value: 0.3 },
             shape: { type: "circle" },
             size: { value: { min: 1, max: 3 } },
           },
+          // Responsive array captures breakpoints dynamically to modify options on the fly
+          responsive: [
+            {
+              maxWidth: 768, // Target screens up to tablet sizes
+              options: {
+                particles: {
+                  number: {
+                    value: 15 // Drops active node generation to preserve CPU lifecycles
+                  }
+                }
+              }
+            }
+          ],
           detectRetina: true,
         }}
       />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 
 // Component Imports
 import Loader from './components/Loader';
@@ -27,66 +27,66 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // If loading is true, only render the Loader component
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
-    <div className="relative min-h-screen bg-darkBg text-white selection:bg-accentPurple selection:text-white">
+    <MotionConfig reducedMotion="user">
+      <div className="relative min-h-screen bg-darkBg text-white selection:bg-accentPurple selection:text-white">
+        
+        {/* AnimatePresence monitors mounted/unmounted status of its direct children. 
+          When loading hits false, the Loader will cleanly run its exit fade animation.
+        */}
+        <AnimatePresence mode="wait">
+          {loading && <Loader />}
+        </AnimatePresence>
 
-      <AnimatePresence mode="wait">
-        {loading && <Loader />}
-      </AnimatePresence>
+        {/* Global Form Notification Setup */}
+        <Toaster 
+          position="bottom-right" 
+          toastOptions={{
+            style: {
+              background: '#1a1a24',
+              color: '#fff',
+              border: '1px solid #7F77DD'
+            }
+          }} 
+        />
 
-      {/* Global Form Notification Setup */}
-      <Toaster 
-        position="bottom-right" 
-        toastOptions={{
-          style: {
-            background: '#1a1a24',
-            color: '#fff',
-            border: '1px solid #7F77DD'
-          }
-        }} 
-      />
+        <ScrollProgressBar />
 
-      <ScrollProgressBar />
+        {/* Navigation */}
+        <Navbar />
 
-      {/* Navigation */}
-      <Navbar />
+        {/* Main Content Sections */}
+        <main>
+          <section id="home">
+            <Hero />
+          </section>
 
-      {/* Main Content Sections */}
-      <main>
-        <section id="home">
-          <Hero />
-        </section>
+          <section id="about">
+            <About />
+          </section>
 
-        <section id="about">
-          <About />
-        </section>
+          <section id="skills">
+            <Skills />
+          </section>
 
-        <section id="skills">
-          <Skills />
-        </section>
+          <section id="projects">
+            <Projects />
+          </section>
 
-        <section id="projects">
-          <Projects />
-        </section>
+          <section id="education">
+            <Education />
+          </section>
 
-        <section id="education">
-          <Education />
-        </section>
+          <section id="contact">
+            <Contact />
+          </section>
+        </main>
 
-        <section id="contact">
-          <Contact />
-        </section>
-      </main>
-
-      {/* Footer and Utility Buttons */}
-      <Footer />
-      <BackToTop />
-    </div>
+        {/* Footer and Utility Buttons */}
+        <Footer />
+        <BackToTop />
+      </div>
+    </MotionConfig>
   );
 };
 
