@@ -1,51 +1,30 @@
+// client/src/components/Skills.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { skillsData } from '../utils/data';
 
 const Skills = () => {
-  // Framer Motion Variants for staggering children
+  // Animation variants for the stagger effect
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
+      transition: { staggerChildren: 0.2 }
     }
   };
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0, scale: 0.8 },
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
     visible: { 
-      y: 0, 
       opacity: 1, 
-      scale: 1,
-      transition: { type: "spring", stiffness: 100, damping: 10 }
+      y: 0, 
+      transition: { type: "spring", stiffness: 80, damping: 15 } 
     }
-  };
-
-  // Helper function to render proficiency dots
-  const renderDots = (level) => {
-    return (
-      <div className="flex gap-1 mt-2">
-        {[1, 2, 3, 4, 5].map((dot) => (
-          <div 
-            key={dot} 
-            className={`w-2 h-2 rounded-full ${
-              dot <= level 
-                ? 'bg-gradient-to-r from-accentPurple to-accentTeal' 
-                : 'bg-gray-700'
-            }`}
-          />
-        ))}
-      </div>
-    );
   };
 
   return (
     <section className="relative py-24 bg-darkBg overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div className="max-w-6xl mx-auto px-6 md:px-12">
         
         {/* Section Heading */}
         <motion.div 
@@ -55,67 +34,51 @@ const Skills = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
         >
+          {/* Removed the absolute gradient line div from here */}
           <h2 className="text-3xl md:text-4xl font-bold inline-block relative">
             Technical Arsenal
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-accentPurple to-accentTeal rounded-full" />
           </h2>
-          <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
-            A comprehensive breakdown of the technologies, frameworks, and tools I use to bring digital architectures to life.
+          <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">
+            A comprehensive overview of my technical stack across multiple engineering disciplines.
           </p>
         </motion.div>
 
-        {/* Skills Grid */}
-        <div className="flex flex-col gap-12">
-          {skillsData.map((categoryGroup, index) => (
+        {/* 2x2 Bento Box Grid */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 optimize-gpu"
+        >
+          {skillsData.map((domain) => (
             <motion.div 
-              key={index}
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              className="w-full"
+              key={domain.id}
+              variants={cardVariants}
+              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-accentTeal/40 transition-colors duration-500 group flex flex-col"
             >
-              <motion.h3 
-                variants={itemVariants} 
-                className="text-xl font-semibold mb-6 text-white border-l-4 border-accentPurple pl-3"
-              >
-                {categoryGroup.category}
-              </motion.h3>
+              {/* Domain Title (Changed mb-6 to mb-4 to tighten the gap even further) */}
+              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-accentPurple group-hover:to-accentTeal transition-all duration-300">
+                {domain.title}
+              </h3>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-                {categoryGroup.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skillIndex}
-                    variants={itemVariants}
-                    className="relative group overflow-hidden bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-5 flex flex-col items-center justify-center hover:border-accentPurple/50 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 cursor-default"
+              {/* Wrapping Skill Pills (Removed mt-auto to align items to the top) */}
+              <div className="flex flex-wrap gap-3">
+                {domain.skills.map((skill, idx) => (
+                  <span 
+                    key={idx}
+                    className="px-4 py-2 bg-darkBg/60 border border-white/5 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:border-accentTeal/50 hover:bg-accentTeal/10 transition-all duration-300 cursor-default shadow-sm hover:shadow-[0_0_15px_rgba(29,158,117,0.2)] hover:-translate-y-0.5"
                   >
-                    {/* Shimmer Effect Background Layer */}
-                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
-                    
-                    {/* Skill Icon */}
-                    <div className="w-12 h-12 mb-3 flex items-center justify-center relative z-10">
-                      <img 
-                        src={skill.icon} 
-                        alt={`${skill.name} icon`} 
-                        className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_12px_rgba(127,119,221,0.6)] transition-all duration-300"
-                      />
-                    </div>
-                    
-                    {/* Skill Name */}
-                    <h4 className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors relative z-10 text-center">
-                      {skill.name}
-                    </h4>
-
-                    {/* Proficiency Dots */}
-                    <div className="relative z-10">
-                      {renderDots(skill.level)}
-                    </div>
-                  </motion.div>
+                    {skill}
+                  </span>
                 ))}
               </div>
+              
+              {/* Subtle Background Glow on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accentPurple/0 via-accentTeal/5 to-accentPurple/0 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 pointer-events-none rounded-2xl -z-10" />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

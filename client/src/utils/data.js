@@ -1,4 +1,3 @@
-// client/src/utils/data.js
 
 export const infoCards = [
   { id: 1, label: "Location", value: "Hyderabad, India" },
@@ -9,31 +8,24 @@ export const infoCards = [
 
 export const skillsData = [
   {
-    category: "Languages & Frameworks",
-    skills: [
-      { name: "JavaScript", level: 5, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-      { name: "React.js", level: 5, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-      { name: "Node.js", level: 4, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-      { name: "Express.js", level: 4, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
-      { name: "Python", level: 4, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-      { name: "Flask", level: 4, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" }
-    ]
+    id: "web",
+    title: "Web Development",
+    skills: ["React.js", "Node.js", "Express.js", "MongoDB", "FastAPI", "Flask", "JWT", "REST APIs", "Microservices"]
   },
   {
-    category: "Databases & Cloud",
-    skills: [
-      { name: "MongoDB", level: 4, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
-      { name: "MySQL", level: 4, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-      { name: "Vercel / Render", level: 4, icon: "https://img.icons8.com/ios-filled/50/7F77DD/cloud-hosting.png" }
-    ]
+    id: "ai",
+    title: "Artificial Intelligence and Gen AI",
+    skills: ["RAG", "Langchain", "Pinecone", "FAISSDB", "Vector DB", "NLP", "Transformers", "Prompt Engineering", "Groq", "LLM Integration", "Ollama", "context-aware retrieval"]
   },
   {
-    category: "CS Fundamentals & AI",
-    skills: [
-      { name: "DBMS & OS", level: 4, icon: "https://img.icons8.com/ios/50/1D9E75/database.png" },
-      { name: "System Design", level: 3, icon: "https://img.icons8.com/ios/50/7F77DD/flow-chart.png" },
-      { name: "RAG Architecture", level: 4, icon: "https://img.icons8.com/ios/50/1D9E75/artificial-intelligence.png" }
-    ]
+    id: "ml",
+    title: "Machine Learning",
+    skills: ["NumPy", "Pandas", "TensorFlow", "Keras", "Deep Learning", "PyTorch", "Scikit-learn", "Matplotlib & Seaborn", "Model Evaluation & Metrics", "OpenCV", "Attention Mechanism"]
+  },
+  {
+    id: "data",
+    title: "Data Science",
+    skills: ["Tableau", "PowerBI", "Advanced Excel", "MySQL", "Python", "Matplotlib", "Exploratory Data Analysis", "Big Data", "Data Cleaning / Preprocessing"]
   }
 ];
 
