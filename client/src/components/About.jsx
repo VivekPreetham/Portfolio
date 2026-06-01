@@ -43,7 +43,7 @@ const About = () => {
                 <img 
                   src="/profile.jpeg" 
                   alt="Vivek Preetham" 
-                  className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500"
+                  className="w-full h-full object-cover transition-all duration-500"
                 />
                 
                 {/* Inner Glowing Ring Animation on Hover */}
