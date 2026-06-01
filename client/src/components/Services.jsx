@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowDownRight } from 'react-icons/fi';
-import { servicesData } from '../utils/data'; // 👈 1. Import the data centrally
+import { servicesData } from '../utils/data';
 
 const Services = () => {
   const containerVariants = {
@@ -26,8 +26,23 @@ const Services = () => {
     <section className="relative py-24 bg-darkBg overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         
-        <div className="h-7 mb-20" />
+        {/* New Section Heading */}
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold inline-block relative mb-4 text-white tracking-tight">
+            What I Build
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg tracking-wide">
+            Turning complex problems into production-ready solutions.
+          </p>
+        </motion.div>
 
+        {/* Services Grid */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"

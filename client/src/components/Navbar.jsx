@@ -89,7 +89,7 @@ const Navbar = () => {
           whileTap={{ scale: 0.95 }}
         >
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-accentPurple to-accentTeal">
-            MVP.
+            MVP
           </span>
           {/* Subtle logo glow on hover */}
           <div className="absolute -inset-2 bg-gradient-to-r from-accentPurple to-accentTeal rounded-full opacity-0 group-hover:opacity-30 blur-lg transition duration-500" />
