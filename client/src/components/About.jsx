@@ -72,14 +72,15 @@ const About = () => {
             </p>
 
             {/* Info Cards Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            {/* Info Cards Grid - UPDATED */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {infoCards.map((card) => (
                 <div 
                   key={card.id} 
                   className="bg-white/5 border border-white/10 backdrop-blur-sm p-4 rounded-xl hover:-translate-y-1 hover:border-accentPurple/50 transition-all duration-300 group"
                 >
                   <p className="text-sm text-gray-500 uppercase tracking-wider mb-1">{card.label}</p>
-                  <p className="text-white font-medium text-sm md:text-base group-hover:text-accentTeal transition-colors">
+                  <p className="text-white font-medium text-sm md:text-base group-hover:text-accentTeal transition-colors break-words">
                     {card.value}
                   </p>
                 </div>

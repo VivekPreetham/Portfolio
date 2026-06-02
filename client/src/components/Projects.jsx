@@ -136,7 +136,6 @@ const Projects = () => {
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {/* LOGIC UPDATE: Safely fallback to an empty array if tags are missing */}
                     {(project.tags || []).map((tag, i) => (
                       <span 
                         key={i} 
@@ -153,6 +152,9 @@ const Projects = () => {
                     href={project.github && project.github !== '#' ? project.github : '#'} 
                     target={project.github && project.github !== '#' ? "_blank" : "_self"}
                     rel="noreferrer"
+                    onClick={(e) => {
+                      if (!project.github || project.github === '#') e.preventDefault();
+                    }}
                     className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
                   >
                     <FaGithub size={16} />
@@ -162,6 +164,10 @@ const Projects = () => {
                     href={project.live && project.live !== '#' ? project.live : '#'} 
                     target={project.live && project.live !== '#' ? "_blank" : "_self"}
                     rel="noreferrer"
+                    onClick={(e) => {
+                      // Prevents browser from jumping to top of page if the link is empty or "#"
+                      if (!project.live || project.live === '#') e.preventDefault();
+                    }}
                     className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-accentTeal transition-colors ml-auto"
                   >
                     <span>Live Demo</span>
