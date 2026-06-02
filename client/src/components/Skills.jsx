@@ -1,4 +1,3 @@
-// client/src/components/Skills.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { skillsData } from '../utils/data';
@@ -28,19 +27,15 @@ const Skills = () => {
         
         {/* Section Heading */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Removed the absolute gradient line div from here */}
           <h2 className="text-3xl md:text-4xl font-bold inline-block relative">
             Technical Arsenal
           </h2>
-          <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">
-            A comprehensive overview of my technical stack across multiple engineering disciplines.
-          </p>
         </motion.div>
 
         {/* 2x2 Bento Box Grid */}
@@ -57,12 +52,12 @@ const Skills = () => {
               variants={cardVariants}
               className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-accentTeal/40 transition-colors duration-500 group flex flex-col"
             >
-              {/* Domain Title (Changed mb-6 to mb-4 to tighten the gap even further) */}
+              {/* Domain Title */}
               <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-accentPurple group-hover:to-accentTeal transition-all duration-300">
                 {domain.title}
               </h3>
               
-              {/* Wrapping Skill Pills (Removed mt-auto to align items to the top) */}
+              {/* Wrapping Skill Pills */}
               <div className="flex flex-wrap gap-3">
                 {domain.skills.map((skill, idx) => (
                   <span 

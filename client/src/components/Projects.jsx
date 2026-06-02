@@ -11,7 +11,7 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
-// 1. Fetch Data from Express API (Memory-Leak Proof)
+  // 1. Fetch Data from Express API (Memory-Leak Proof)
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -19,16 +19,17 @@ const Projects = () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
         const response = await axios.get(`${apiUrl}/projects`, {
-          signal: abortController.signal // Link the signal to the request
+          signal: abortController.signal
         });
         
-        if (response.data.success && response.data.data.length > 0) {
+        // LOGIC UPDATE: Safely check if data exists and is an array before checking length
+        if (response.data.success && Array.isArray(response.data.data) && response.data.data.length > 0) {
           setProjects(response.data.data);
         } else {
+          console.warn("API returned empty or invalid data, using fallback projects.");
           setProjects(fallbackProjects);
         }
       } catch (error) {
-        // Ignore the error if it was intentionally aborted by component unmount
         if (error.name === 'CanceledError') return; 
         
         console.error("API Fetch Failed, loading fallback data:", error.message);
@@ -40,7 +41,6 @@ const Projects = () => {
 
     fetchProjects();
 
-    // Cleanup function runs if the component unmounts before fetch completes
     return () => abortController.abort();
   }, []);
 
@@ -56,12 +56,10 @@ const Projects = () => {
         scale: 1.02,
       });
       
-      // Cleanup to prevent memory leaks
       return () => elements.forEach(el => el.vanillaTilt?.destroy());
     }
   }, [loading, projects]);
 
-  // Framer Motion Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -82,12 +80,10 @@ const Projects = () => {
   return (
     <section className="relative py-24 bg-darkBg overflow-hidden">
       
-      {/* Background Decorative Blob */}
       <div className="absolute top-40 right-[-10%] w-96 h-96 bg-accentPurple rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
-        {/* Section Heading */}
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -100,17 +96,15 @@ const Projects = () => {
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-accentPurple to-accentTeal rounded-full" />
           </h2>
           <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
-            A selection of my recent full-stack applications, built with modern architectures and clean UI principles.
+            A selection of my recent work bridging complex artificial intelligence models with scalable, production-ready web architectures.
           </p>
         </motion.div>
 
-        {/* Loading State */}
         {loading ? (
           <div className="flex justify-center items-center h-40">
             <div className="w-12 h-12 border-4 border-white/10 border-t-accentPurple rounded-full animate-spin" />
           </div>
         ) : (
-          /* Projects Grid */
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={containerVariants}
@@ -124,28 +118,26 @@ const Projects = () => {
                 variants={itemVariants}
                 className="tilt-card relative bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex flex-col h-full group hover:border-white/20 transition-colors duration-300 transform-style-3d"
                 style={{
-                  boxShadow: `0 0 0 rgba(0,0,0,0)` // Base shadow
+                  boxShadow: `0 0 0 rgba(0,0,0,0)` 
                 }}
               >
-                {/* Custom Gradient Top Border */}
                 <div 
                   className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl opacity-70 group-hover:opacity-100 transition-opacity"
                   style={{ backgroundColor: project.color || '#7F77DD', boxShadow: `0 0 15px ${project.color || '#7F77DD'}` }}
                 />
 
-                {/* Card Content */}
                 <div className="flex-1 transform-translate-z-20">
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-accentPurple group-hover:to-accentTeal transition-all duration-300">
-                    {project.title}
+                    {project.title || "Untitled Project"}
                   </h3>
                   
                   <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-4">
-                    {project.description}
+                    {project.description || "No description provided."}
                   </p>
 
-                  {/* Tech Stack Tags */}
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag, i) => (
+                    {/* LOGIC UPDATE: Safely fallback to an empty array if tags are missing */}
+                    {(project.tags || []).map((tag, i) => (
                       <span 
                         key={i} 
                         className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-gray-300"
@@ -156,11 +148,10 @@ const Projects = () => {
                   </div>
                 </div>
 
-                {/* Action Buttons */}
                 <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/10 transform-translate-z-30">
                   <a 
-                    href={project.github !== '#' ? project.github : '#'} 
-                    target={project.github !== '#' ? "_blank" : "_self"}
+                    href={project.github && project.github !== '#' ? project.github : '#'} 
+                    target={project.github && project.github !== '#' ? "_blank" : "_self"}
                     rel="noreferrer"
                     className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
                   >
@@ -168,8 +159,8 @@ const Projects = () => {
                     <span>Code</span>
                   </a>
                   <a 
-                    href={project.live !== '#' ? project.live : '#'} 
-                    target={project.live !== '#' ? "_blank" : "_self"}
+                    href={project.live && project.live !== '#' ? project.live : '#'} 
+                    target={project.live && project.live !== '#' ? "_blank" : "_self"}
                     rel="noreferrer"
                     className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-accentTeal transition-colors ml-auto"
                   >
@@ -178,7 +169,6 @@ const Projects = () => {
                   </a>
                 </div>
                 
-                {/* Inner Glow on Hover based on Project Color */}
                 <div 
                   className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
                   style={{ background: `radial-gradient(circle at center, ${project.color || '#7F77DD'} 0%, transparent 70%)` }}

@@ -11,14 +11,13 @@ connectDB();
 
 const app = express();
 
-// 1. CRITICAL FOR DEPLOYMENT: Trust the reverse proxy headers (Render, Railway, AWS, etc.)
+
 // Without this, express-rate-limit will block ALL users when one user triggers it.
 app.set('trust proxy', 1);
 
 // Security Middleware
 app.use(helmet());
 
-// 2. BULLETPROOF CORS CONFIGURATION
 // Explicitly falls back to local Vite development port if the env variable isn't read cleanly
 app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:5173',
@@ -31,7 +30,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate Limiting (Spam Prevention)
+// Rate Limiting
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 5, 
@@ -41,7 +40,6 @@ const contactLimiter = rateLimit({
 });
 
 // --- API ROUTES ---
-
 // Health Check Route
 app.get('/', (req, res) => {
   res.status(200).json({ success: true, message: 'MERN Portfolio API is running smoothly...' });
@@ -51,7 +49,6 @@ app.get('/', (req, res) => {
 app.use('/api/contact', contactLimiter, require('./routes/contactRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
 
-// 3. FALLBACK FOR UNHANDLED ROUTES
 // Prevents frontend jank if an incorrect endpoint is targeted by returning standard JSON
 app.use((req, res, next) => {
   const error = new Error(`Not Found - ${req.originalUrl}`);

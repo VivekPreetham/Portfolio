@@ -55,52 +55,85 @@ export const educationData = [
 
 export const fallbackProjects = [
   {
-    title: "Weekend Knocks Platform",
-    description: "A competitive esports tournament platform with user registration, live brackets, and team management features.",
-    tags: ["React", "Node.js", "MongoDB", "Express"],
-    github: "#",
-    live: "#",
-    color: "#7F77DD"
+    _id: "1",
+    title: "DocuMind",
+    description: "A full-stack Retrieval-Augmented Generation (RAG) platform enabling semantic PDF Q&A. Built with a FastAPI microservice, FAISS vector indexing, and Groq-hosted LLM inference for low-latency, context-aware responses.",
+    tags: ["React", "FastAPI", "FAISS", "LangChain"],
+    github: "https://github.com/VivekPreetham/DocuMind",
+    live: "#", 
+    color: "#1D9E75" // accentTeal
   },
   {
-    title: "AI-Powered Student Portal",
-    description: "An intelligent academy management assistant using a Flask backend and RAG vector databases for instant knowledge retrieval.",
-    tags: ["Flask", "Python", "RAG", "React"],
-    github: "#",
+    _id: "2",
+    title: "ByteBrain",
+    description: "An end-to-end educational platform that adapts content based on learner proficiency. It integrates an LLM-backed chatbot, candidate reranking architectures, and NLP pipelines to serve contextually relevant material at scale.",
+    tags: ["Flutter", "Node.js", "MongoDB", "NLP"],
+    github: "https://github.com/VivekPreetham/ByteBrain",
     live: "#",
-    color: "#1D9E75"
+    color: "#7F77DD" // accentPurple
   },
   {
-    title: "E-Commerce Architecture",
-    description: "Full-featured online store with secure authentication, shopping cart state management, and integrated payments.",
-    tags: ["MERN Stack", "Redux", "Stripe"],
-    github: "#",
+    _id: "3",
+    title: "Twitter Sentiment Analysis",
+    description: "A multi-class sentiment analysis solution for noisy social media text. Leveraged a BiLSTM network with an attention mechanism and a comprehensive preprocessing pipeline to improve classification accuracy to 95%.",
+    tags: ["Python", "TensorFlow", "BiLSTM", "NLP"],
+    github: "https://github.com/VivekPreetham/Twitter-Sentiment-Analysis",
     live: "#",
-    color: "#a855f7"
+    color: "#3B82F6" // Tech Blue
   },
   {
-    title: "TantraFiesta Bug Tracker",
-    description: "An issue tracking and vulnerability management dashboard inspired by Jira, built to manage bug bounty reports.",
-    tags: ["React", "Express", "MongoDB"],
-    github: "#",
+    _id: "4",
+    title: "MERN Portfolio Architecture",
+    description: "A high-performance, animated developer portfolio featuring 3D tilt mechanics, glassmorphism UI, and an Express.js backend secured with rate-limiting and robust CORS configurations.",
+    tags: ["React", "Tailwind CSS", "Framer Motion", "Node.js"],
+    github: "https://github.com/VivekPreetham/Portfolio",
     live: "#",
-    color: "#3B82F6"
+    color: "#F59E0B" // Amber
   },
   {
-    title: "Agentic Digital Assistant",
-    description: "A simulated digital sales assistant built for BFSI scenarios, capable of human-like loan sales processing.",
-    tags: ["Python", "LLMs", "FastAPI"],
-    github: "#",
+    _id: "5",
+    title: "Smart Healthcare Platform",
+    description: "A comprehensive digital health management system designed to streamline patient records, appointment scheduling, and hospital administration with secure JWT authentication and a distributed backend.",
+    tags: ["MERN Stack", "REST APIs", "SQL", "MongoDB"],
+    github: "https://github.com/VivekPreetham/Smart-Healthcare-Management",
     live: "#",
-    color: "#F59E0B"
+    color: "#06B6D4" // Cyan
   },
   {
-    title: "Real-Time Chat App",
-    description: "Instant messaging application featuring persistent chat rooms and real-time event broadcasting.",
-    tags: ["React", "Socket.io", "Express"],
-    github: "#",
+    _id: "6",
+    title: "Real-Time Face Detection",
+    description: "A robust computer vision system capable of identifying and tracking facial features in real-time video streams utilizing Multi-Task Cascaded Convolutional Networks (MTCNN) and OpenCV.",
+    tags: ["Python", "OpenCV", "MTCNN", "Computer Vision"],
+    github: "https://github.com/VivekPreetham/Face-Detection",
     live: "#",
-    color: "#EC4899"
+    color: "#EF4444" // Red
+  },
+  {
+    _id: "7",
+    title: "Movie Recommendation Engine",
+    description: "A machine learning recommendation system utilizing content-based filtering and cosine similarity metrics to suggest contextually relevant films based on a user's specific viewing history and preferences.",
+    tags: ["Python", "Scikit-learn", "Pandas", "Streamlit"],
+    github: "https://github.com/VivekPreetham/Movie-recommendation-system",
+    live: "#",
+    color: "#10B981" // Emerald
+  },
+  {
+    _id: "8",
+    title: "Facemash Rating Engine",
+    description: "A full-stack Elo-rating based comparison application. Engineered with a scalable REST API backend deployed on Render and a responsive frontend to seamlessly handle concurrent user ranking requests.",
+    tags: ["React", "Node.js", "MongoDB", "Vercel"],
+    github: "https://github.com/VivekPreetham/facemash",
+    live: "#",
+    color: "#EC4899" // Pink
+  },
+  {
+    _id: "9",
+    title: "AI Pitch Visualizer",
+    description: "An AI-powered platform that transforms sales narratives into multi-panel visual storyboards. Engineered with a Next.js frontend and an asynchronous FastAPI backend, leveraging Llama 3.1 for intelligent prompt engineering and Flux Engine for stylistically consistent image generation.",
+    tags: ["Next.js", "FastAPI", "Llama 3.1", "GenAI"],
+    github: "https://github.com/VivekPreetham/Pitch-Visualizer",
+    live: "#",
+    color: "#8B5CF6" // Violet
   }
 ];
 

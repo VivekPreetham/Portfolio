@@ -1,77 +1,103 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Project = require('./models/Project');
-const connectDB = require('./config/db');
 
-// Your 6 sample projects from the blueprint
-const sampleProjects = [
+const Project = require('./models/Project'); 
+
+const projectsData = [
   {
-    title: "E-Commerce Platform",
-    description: "A full-featured online store with user authentication, shopping cart, and integrated Stripe payments.",
-    tags: ["React", "Node.js", "MongoDB", "Stripe"],
-    github: "https://github.com/yourusername/ecommerce",
-    live: "https://your-ecommerce-demo.com",
-    color: "#7F77DD" // Purple
+    title: "DocuMind",
+    description: "A full-stack Retrieval-Augmented Generation (RAG) platform enabling semantic PDF Q&A. Built with a FastAPI microservice, FAISS vector indexing, and Groq-hosted LLM inference for low-latency, context-aware responses.",
+    tags: ["React", "FastAPI", "FAISS", "LangChain"],
+    github: "https://github.com/VivekPreetham/DocuMind",
+    live: "#", 
+    color: "#1D9E75"
   },
   {
-    title: "Real-Time Chat App",
-    description: "Instant messaging application featuring persistent chat rooms, private messaging, and typing indicators.",
-    tags: ["React", "Express", "Socket.io", "MongoDB"],
-    github: "https://github.com/yourusername/chat-app",
-    live: "https://your-chat-demo.com",
-    color: "#1D9E75" // Teal
+    title: "ByteBrain",
+    description: "An end-to-end educational platform that adapts content based on learner proficiency. It integrates an LLM-backed chatbot, candidate reranking architectures, and NLP pipelines to serve contextually relevant material at scale.",
+    tags: ["Flutter", "Node.js", "MongoDB", "NLP"],
+    github: "https://github.com/VivekPreetham/ByteBrain",
+    live: "#",
+    color: "#7F77DD"
   },
   {
-    title: "Disease Prediction System",
-    description: "An intelligent diagnostic tool using trained machine learning models to predict disease likelihood based on symptoms.",
-    tags: ["Python", "Flask", "Machine Learning", "React"],
-    github: "https://github.com/yourusername/disease-predictor",
-    live: "https://your-ml-demo.com",
-    color: "#F59E0B" // Amber
+    title: "Twitter Sentiment Analysis",
+    description: "A multi-class sentiment analysis solution for noisy social media text. Leveraged a BiLSTM network with an attention mechanism and a comprehensive preprocessing pipeline to improve classification accuracy to 95%.",
+    tags: ["Python", "TensorFlow", "BiLSTM", "NLP"],
+    github: "https://github.com/VivekPreetham/Twitter-Sentiment-Analysis",
+    live: "#",
+    color: "#3B82F6"
   },
   {
-    title: "Student Management System",
-    description: "A comprehensive dashboard for academic institutions to track student enrollment, grades, and attendance.",
-    tags: ["React", "Node.js", "MySQL", "Express"],
-    github: "https://github.com/yourusername/student-management",
-    live: "https://your-sms-demo.com",
-    color: "#3B82F6" // Blue
+    title: "MERN Portfolio Architecture",
+    description: "A high-performance, animated developer portfolio featuring 3D tilt mechanics, glassmorphism UI, and an Express.js backend secured with rate-limiting and robust CORS configurations.",
+    tags: ["React", "Tailwind CSS", "Framer Motion", "Node.js"],
+    github: "https://github.com/VivekPreetham/Portfolio",
+    live: "#",
+    color: "#F59E0B"
   },
   {
-    title: "Portfolio Website",
-    description: "A visually stunning personal portfolio featuring 3D tilt effects, GSAP scroll animations, and a secure backend API.",
-    tags: ["React", "Express", "MongoDB", "GSAP"],
-    github: "https://github.com/yourusername/portfolio",
-    live: "https://your-portfolio.com",
-    color: "#EC4899" // Pink
+    title: "Smart Healthcare Platform",
+    description: "A comprehensive digital health management system designed to streamline patient records, appointment scheduling, and hospital administration with secure JWT authentication and a distributed backend.",
+    tags: ["MERN Stack", "REST APIs", "Express.js", "MongoDB"],
+    github: "https://github.com/VivekPreetham/Smart-Healthcare-Management",
+    live: "#",
+    color: "#06B6D4"
   },
   {
-    title: "Weather Dashboard",
-    description: "A dynamic weather application providing real-time forecasting, interactive maps, and historical data visualization.",
-    tags: ["React", "OpenWeather API", "Chart.js", "Tailwind"],
-    github: "https://github.com/yourusername/weather-app",
-    live: "https://your-weather-demo.com",
-    color: "#8B5CF6" // Violet
+    title: "Real-Time Face Detection",
+    description: "A robust computer vision system capable of identifying and tracking facial features in real-time video streams utilizing Multi-Task Cascaded Convolutional Networks (MTCNN) and OpenCV.",
+    tags: ["Python", "OpenCV", "MTCNN", "Computer Vision"],
+    github: "https://github.com/VivekPreetham/Face-Detection",
+    live: "#",
+    color: "#EF4444"
+  },
+  {
+    title: "Movie Recommender Engine",
+    description: "A machine learning recommendation system utilizing content-based filtering and cosine similarity metrics to suggest contextually relevant films based on a user's specific viewing history and preferences.",
+    tags: ["Python", "Scikit-learn", "Pandas", "Streamlit"],
+    github: "https://github.com/VivekPreetham/Movie-recommendation-system",
+    live: "#",
+    color: "#10B981"
+  },
+  {
+    title: "Facemash Rating Engine",
+    description: "A full-stack Elo-rating based comparison application. Engineered with a scalable REST API backend deployed on Render and a responsive frontend to seamlessly handle concurrent user ranking requests.",
+    tags: ["React", "Node.js", "Express", "Vercel"],
+    github: "https://github.com/VivekPreetham/facemash",
+    live: "#",
+    color: "#EC4899"
+  },
+  {
+    title: "AI Pitch Visualizer",
+    description: "An AI-powered platform that transforms sales narratives into multi-panel visual storyboards. Engineered with a Next.js frontend and an asynchronous FastAPI backend, leveraging Llama 3.1 for intelligent prompt engineering and Flux Engine for stylistically consistent image generation.",
+    tags: ["Next.js", "FastAPI", "Llama 3.1", "GenAI"],
+    github: "https://github.com/VivekPreetham/Pitch-Visualizer",
+    live: "#",
+    color: "#8B5CF6"
   }
 ];
 
-const importData = async () => {
+const seedDatabase = async () => {
   try {
-    await connectDB(); // Connect to MongoDB
+    // 1. Connect to MongoDB
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('MongoDB Connected...');
 
-    // Clear existing data to prevent duplicates if you run this multiple times
-    await Project.deleteMany(); 
-    console.log('Existing projects cleared.');
+    // 2. Wipe the existing collection to prevent duplicates
+    await Project.deleteMany();
+    console.log('Old projects cleared...');
 
-    // Insert the new sample data
-    await Project.insertMany(sampleProjects);
-    console.log('Sample projects successfully inserted!');
+    // 3. Insert the new array
+    await Project.insertMany(projectsData);
+    console.log('All 9 Projects successfully seeded!');
 
+    // 4. Exit the process successfully
     process.exit();
   } catch (error) {
-    console.error(`Error importing data: ${error.message}`);
+    console.error('Error seeding data:', error);
     process.exit(1);
   }
 };
 
-importData();
+seedDatabase();
