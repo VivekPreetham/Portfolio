@@ -4,7 +4,7 @@
 
 A high-performance, dynamic developer portfolio built on the **MERN Stack** (MongoDB, Express, React, Node.js). This project serves not just as a static resume, but as a fully functional, database-driven web application featuring 3D tilt mechanics, glassmorphism UI design, and a robust REST API.
 
-🔗 **[View Live Demo](#)** *https://portfolio-eight-sand-59.vercel.app/*
+🔗 **[View Live Demo](#)** *(https://portfolio-eight-sand-59.vercel.app/)*
 
 ---
 
