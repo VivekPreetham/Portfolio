@@ -33,7 +33,7 @@ const projectsData = [
     description: "A high-performance, animated developer portfolio featuring 3D tilt mechanics, glassmorphism UI, and an Express.js backend secured with rate-limiting and robust CORS configurations.",
     tags: ["React", "Tailwind CSS", "Framer Motion", "Node.js"],
     github: "https://github.com/VivekPreetham/Portfolio",
-    live: "#",
+    live: "#https://portfolio-eight-sand-59.vercel.app/",
     color: "#F59E0B"
   },
   {
